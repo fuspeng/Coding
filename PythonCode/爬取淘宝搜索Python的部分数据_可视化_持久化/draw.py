@@ -1,6 +1,8 @@
 # 使用matplotlib绘制饼图
 import numpy as np
 import matplotlib.pyplot as plt
+import math
+import random
 
 # 设置全局字体
 plt.rcParams['font.sans-serif'] = ['SimHei']
@@ -38,9 +40,26 @@ def pie(data, img_name):
 def bar(data, img_name):
     #values = [x for x in data.values()]
 
+    # fig = plt.figure()
+    # ax = fig.add_subplot(111)
+    # jet = cm = plt.get_cmap('jet')
+    # cNorm  = colors.Normalize(vmin=0, vmax=values[-1])
+    # scalarMap = cmx.ScalarMappable(norm=cNorm, cmap=jet)
     dataY = [x for x in data.values()]
     dataX = [x for x in data.keys()]
 
-    plt.bar(range(len(dataY)), dataY, tick_label=dataX)
+    curves = [format_color() for i in range(len(data))]
+    print(curves)
+
+    plt.bar(range(len(dataY)), dataY, tick_label=dataX, color=curves)
+    plt.savefig(img_name.format('.jpg'))
     plt.show()
 
+def format_color():
+    colorR = ''
+    for i in range(6):
+        strNum = math.floor(random.uniform(0,17))
+        colorf = hex(strNum)[-1]
+        colorR = colorR + colorf
+    colorR = '#' + colorR
+    return colorR
