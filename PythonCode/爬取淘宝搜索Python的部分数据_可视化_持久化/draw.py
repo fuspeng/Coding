@@ -49,9 +49,11 @@ def bar(data, img_name):
     dataX = [x for x in data.keys()]
 
     curves = [format_color() for i in range(len(data))]
-    print(curves)
+    fig = plt.figure(figsize=(10, 5))
+    ax1 = fig.add_subplot(111)
+    ax1.set_title(img_name)
 
-    plt.bar(range(len(dataY)), dataY, tick_label=dataX, color=curves)
+    ax1.bar(range(len(dataY)), dataY, tick_label=dataX, color=curves)
     plt.savefig(img_name.format('.jpg'))
     plt.show()
 
