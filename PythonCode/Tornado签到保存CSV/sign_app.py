@@ -44,6 +44,8 @@ application = web.Application([
     (r"/code", CodeHandler)
 ])
 
+# 浏览器输入localhost/login 得到百度图片的网址二维码
+# 浏览器输入localhost/sign 进入签到页面，可在本地保存成csv文件
 if __name__ == "__main__":
     http_server = httpserver.HTTPServer(application)
     http_server.listen(80)
