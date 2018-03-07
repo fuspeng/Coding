@@ -3,6 +3,7 @@
 
 from tornado import web, ioloop,httpserver
 from create_qr_code import get_code_by_str
+import json
 
 # 文件句柄
 # 全局变量
@@ -24,6 +25,7 @@ class SignHandler(web.RequestHandler):
         name = self.get_argument("name")
         number = self.get_argument("number")
         department = self.get_argument("department")
+        self.render('welcome.html', name=name)
         print(name,number,department)
         # 将受到的数据写入csv文件
         SIGN_FILE_HANDLER.write('%s,%s,%s\n'%(name,number,department))
