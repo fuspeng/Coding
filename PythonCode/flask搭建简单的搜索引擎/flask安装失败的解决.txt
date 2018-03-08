@@ -1,0 +1,27 @@
+#解决python中使用flask时遇到的markupsafe._compat包缺失的问题
+#用pip freeze查看本地包，如果markupsafe和Jinjia2都已经安装，则进行下一步
+#找到本地Python目录下的Lib\site-packages\markupsafe
+#新建一个名为_compat.py的文件
+#写入一下内容
+# -*- coding: utf-8 -*-
+"""
+    markupsafe._compat
+    ~~~~~~~~~~~~~~~~~~
+    Compatibility module for different Python versions.
+    :copyright: (c) 2013 by Armin Ronacher.
+    :license: BSD, see LICENSE for more details.
+"""
+import sys
+PY2 = sys.version_info[0] == 2
+if not PY2:
+    text_type = str
+    string_types = (str,)
+    unichr = chr
+    int_types = (int,)
+    iteritems = lambda x: iter(x.items())
+else:
+    text_type = unicode
+    string_types = (str, unicode)
+    unichr = unichr
+    int_types = (int, long)
+    iteritems = lambda x: x.iteritems()
